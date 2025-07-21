@@ -6,7 +6,7 @@ app = Flask(__name__)
 def receive_data():
     data = request.get_json()
     if data:
-        print(f"📥 温度: {data['temperature']}°C, 湿度: {data['humidity']}%")
+        print(f"温度: {data['temperature']}°C, 湿度: {data['humidity']}%")
         return "Received", 200
     return "No data", 400
 
