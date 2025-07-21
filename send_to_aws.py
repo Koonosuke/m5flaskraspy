@@ -2,17 +2,17 @@
 
 import json
 import ssl
+import traceback
 import paho.mqtt.client as mqtt
 
 # ====== AWS IoT Core 接続情報 ======
-AWS_ENDPOINT = "ayhwynhqtsmv-ats.iot.us-west-2.amazonaws.com"  # ← ここを実際のエンドポイントに置き換えてください
+AWS_ENDPOINT = "ayhwynhqtsmv-ats.iot.us-west-2.amazonaws.com"
 TOPIC = "iot/m5core2/sensor"
 
 # ====== 証明書ファイルのパス（フルパス） ======
 CA_PATH = "/m5flask/m5flaskraspy/certs/AmazonRootCA1.pem"
-CERT_PATH = "/m5flask/m5flaskraspy/certs/device-cert.pem.crt"  # 例：リネーム後のデバイス証明書
-KEY_PATH = "/m5flask/m5flaskraspy/certs/private-key.pem.key"   # 例：リネーム後の秘密鍵
-    
+CERT_PATH = "/m5flask/m5flaskraspy/certs/device-cert.pem.crt"
+KEY_PATH = "/m5flask/m5flaskraspy/certs/private-key.pem.key"
 
 # ====== 送信関数 ======
 def send_to_aws(payload: dict):
@@ -37,4 +37,5 @@ def send_to_aws(payload: dict):
         print("Successfully sent to AWS IoT Core")
 
     except Exception as e:
+        traceback.print_exc()  # ← 例外の詳細を表示！
         print(f"Failed to send to AWS IoT Core: {e}")
