@@ -9,9 +9,10 @@ AWS_ENDPOINT = "ayhwynhqtsmv-ats.iot.us-west-2.amazonaws.com"  # ← ここを�
 TOPIC = "iot/m5core2/sensor"
 
 # ====== 証明書ファイルのパス（フルパス） ======
-CA_PATH = "/m5flask/m5flaskraspy/certs/f2a99107de4f9626f0321bf885ea1e0f085b65168e99c2df9d19f1dfa48fcf57-certificate.pem"
-CERT_PATH = "/m5flask/m5flaskraspy/certs/f2a99107de4f9626f0321bf885ea1e0f085b65168e99c2df9d19f1dfa48fcf57-public.pem.key"    # ← 取得した証明書ファイル名に変更
-KEY_PATH = "/m5flask/m5flaskraspy/certs/f2a99107de4f9626f0321bf885ea1e0f085b65168e99c2df9d19f1dfa48fcf57-private.pem.key"         # ← 秘密鍵のファイル名に変更
+CA_PATH = "/m5flask/m5flaskraspy/certs/AmazonRootCA1.pem"
+CERT_PATH = "/m5flask/m5flaskraspy/certs/device-cert.pem.crt"  # 例：リネーム後のデバイス証明書
+KEY_PATH = "/m5flask/m5flaskraspy/certs/private-key.pem.key"   # 例：リネーム後の秘密鍵
+    
 
 # ====== 送信関数 ======
 def send_to_aws(payload: dict):

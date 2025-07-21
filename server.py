@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from datetime import datetime, timedelta
+from send_to_aws import send_to_aws  # ← 追加！
 
 app = Flask(__name__)
 
@@ -9,12 +10,14 @@ def receive_data():
     if not data:
         return "No data", 400
 
-    # 日本時間（JST）
+    # JST（日本時間）でタイムスタンプを追加
     jst = datetime.utcnow() + timedelta(hours=9)
     data["timestamp"] = jst.isoformat()
 
-   
     print(f"受信データ: {data}")
+
+    # AWS IoT Coreに送信！
+    send_to_aws(data)  # ← 追加！
 
     return jsonify({"status": "received", "data": data}), 200
 
